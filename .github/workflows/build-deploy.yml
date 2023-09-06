@@ -60,10 +60,11 @@ jobs:
 
       - name: deploy to ${{ inputs.ENVIRONMENT }}
         run: |
-          echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
-          mvn clean dependency:copy -s ci_settings.xml
+          echo project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV          
+          mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=$project_version
           cd target
           ls -ltr 
+          echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
           
