@@ -62,9 +62,11 @@ jobs:
         run: |
           project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "project Version = '$project_version'"
-          echo "project_version=$project_version" >> $GITHUB_ENV
-          echo "project Version = '${{ env.project_version }}'"
-          mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=${{ env.project_version }}
+          IFS='-'
+          read -ra arr << "$project_version"
+          art_version=${arr[0]}
+          echo "version=$art_version"
+          mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=$art_version
           cd target
           ls -ltr 
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
