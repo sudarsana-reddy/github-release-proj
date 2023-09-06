@@ -33,11 +33,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-        
+
       - name: release to github packages
         run: |
           # mvn clean deploy -s ci_settings.xml
-          mvn release:clean release:prepare release:perform -s ci_settings.xml
+          mvn release:clean release:prepare release:perform -s ci_settings.xml -Dusername=github -Dpassword=${{ secrets.PAT }}
         env:
             GITHUB_TOKEN: ${{ secrets.PAT }}     
           
