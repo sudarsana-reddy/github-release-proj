@@ -69,7 +69,9 @@ jobs:
           mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=$art_version
           cd target
           ls -ltr 
+          cd ..
           warFile="demo-$version.war"
+          echo "war file:$warFile"
           mvn tomcat7:deploy -s ci_settings.xml -DwarFile=./target/$warFile
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
         env:
