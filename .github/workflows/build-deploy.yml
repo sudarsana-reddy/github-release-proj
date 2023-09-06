@@ -37,9 +37,11 @@ jobs:
       - name: release to github packages
         run: |
           # mvn clean deploy -s ci_settings.xml
-          mvn release:clean release:prepare release:perform -s ci_settings.xml -Dusername=${{ github.actor }} -Dpassword=${{ secrets.PAT }}
+          mvn release:clean release:prepare release:perform -s ci_settings.xml
         env:
-            GITHUB_TOKEN: ${{ secrets.PAT }}     
+            GITHUB_TOKEN: ${{ secrets.PAT }}
+            GIT_USERNAME: ${{ github.actor }}
+            GIT_PASSWORD: ${{ secrets.PAT }}
           
           
   deploy:
