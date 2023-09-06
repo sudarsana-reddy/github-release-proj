@@ -5,11 +5,11 @@ on:
     outputs:
       BRANCH:
         description: "branch name"
-        value: ${{ jobs.initJob.outputs.BRANCH }}
+        value: ${{ jobs.init-inputs.outputs.BRANCH }}
 
       ENVIRONMENT:
         description: "environment name"
-        value: ${{ jobs.initJob.outputs.ENVIRONMENT }}      
+        value: ${{ jobs.init-inputs.outputs.ENVIRONMENT }}      
           
  
 jobs:
@@ -28,12 +28,12 @@ jobs:
         echo ${{ github.event_name }}
         
         if [[ "${{ github.ref_name }}" == *"develop" ]]; then
-          echo "::set-output name=BRANCH::develop"
-          echo "::set-output name=ENVIRONMENT::dev"
+          echo "BRANCH=develop" >> "$GITHUB_OUTPUT"
+          echo "ENVIRONMENT=dev" >> "$GITHUB_OUTPUT"
       
         elif [[ "${{ github.ref_name }}" == *"main" ]]; then
-          echo "::set-output name=BRANCH::main"
-          echo "::set-output name=ENVIRONMENT::prod"        
+          echo "BRANCH=main" >> "$GITHUB_OUTPUT"
+          echo "ENVIRONMENT=prod"  >> "$GITHUB_OUTPUT"      
         fi
 
     - name: Print the outputs
