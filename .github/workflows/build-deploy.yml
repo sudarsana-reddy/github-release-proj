@@ -23,7 +23,13 @@ jobs:
 
       - name: build
         run: |
-          echo "build job is done for ${{ inputs.BRANCH }}"
+          mvn clean install
+
+      - name: upload to github packages
+        run: |
+          mvn clean deploy -s ci_settings.xml
+        env:
+            GITHUB_TOKEN: ${{ secrets.PAT }}
           
           
   deploy:
