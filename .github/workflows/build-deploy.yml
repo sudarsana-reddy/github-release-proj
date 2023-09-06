@@ -69,9 +69,12 @@ jobs:
           mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=$art_version
           cd target
           ls -ltr 
+          warFile="demo-$version.war"
+          mvn tomcat7:deploy -s ci_settings.xml -DwarFile=./target/$warFile
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
+          TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
           
       - name: notification
         run: |
