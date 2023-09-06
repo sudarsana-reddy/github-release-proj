@@ -101,7 +101,7 @@
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.2</version>
           <configuration>
-            <url>http://localhost:8080/manager/text</url>
+            <url>https://2158-124-123-160-21.ngrok-free.app/manager/text</url>
             <server>TomcatServer</server>
             <path>/hello</path>
           </configuration>
