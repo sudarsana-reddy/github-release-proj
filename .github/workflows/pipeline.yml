@@ -8,11 +8,11 @@ on:
 
 jobs:
 
-  initJob:
+  init-inputs-job:
     uses: ./.github/workflows/init-inputs.yml
 
-  sync-deploy-verify-job: 
-    needs: [initJob]  
+  build-deploy-job: 
+    needs: [init-inputs-job]  
     uses: ./.github/workflows/build-deploy.yml
     with:
       BRANCH: ${{ needs.initJob.outputs.BRANCH }}

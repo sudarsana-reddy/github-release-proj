@@ -1,4 +1,4 @@
-name: sync-deploy-verify
+name: Initialize input variables
 
 on:
   workflow_call:
@@ -13,7 +13,7 @@ on:
           
  
 jobs:
-  initJob:
+  init-inputs:
     runs-on: ubuntu-latest
     outputs:   
       BRANCH: ${{steps.initVars.outputs.BRANCH}}
