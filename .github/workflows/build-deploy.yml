@@ -57,7 +57,10 @@ jobs:
     steps:
       - name: deploy to ${{ inputs.ENVIRONMENT }}
         run: |
-          echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"          
+          echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
+          mvn clean dependency:copy -s ci_settings.xml
+          cd target
+          ls -ltr 
           
       - name: notification
         run: |
