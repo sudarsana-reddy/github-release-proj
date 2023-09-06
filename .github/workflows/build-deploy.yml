@@ -24,23 +24,33 @@ jobs:
       - name: build
         run: |
           mvn clean install
+      
 
-      - name: upload to github packages
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        
+      - name: release to github packages
         run: |
-          mvn clean deploy -s ci_settings.xml
+          # mvn clean deploy -s ci_settings.xml
+          mvn release:clean release:prepare release:perform -s ci_settings.xml
         env:
-            GITHUB_TOKEN: ${{ secrets.PAT }}
+            GITHUB_TOKEN: ${{ secrets.PAT }}     
           
           
   deploy:
-    needs: [build]
+    needs: [release]
     environment: ${{ inputs.ENVIRONMENT }}
     runs-on: ubuntu-latest
     if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }} 
     steps:
       - name: deploy to ${{ inputs.ENVIRONMENT }}
         run: |
-          echo "Deployment to '${{ inputs.ENVIRONMENT  }}'' successful"
+          echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"          
           
       - name: notification
         run: |
