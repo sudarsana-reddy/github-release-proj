@@ -15,6 +15,6 @@ jobs:
     needs: [init-inputs-job]  
     uses: ./.github/workflows/build-deploy.yml
     with:
-      BRANCH: ${{ needs.initJob.outputs.BRANCH }}
-      ENVIRONMENT: ${{ needs.initJob.outputs.ENVIRONMENT }}
+      BRANCH: ${{ needs.init-inputs-job.outputs.BRANCH }}
+      ENVIRONMENT: ${{ needs.init-inputs-job.outputs.ENVIRONMENT }}
     secrets: inherit
