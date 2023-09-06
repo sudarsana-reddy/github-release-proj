@@ -63,7 +63,7 @@ jobs:
           project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "project Version = '$project_version'"
           IFS='-'
-          read -ra arr << "$project_version"
+          read -ra arr <<< "$project_version"
           art_version=${arr[0]}
           echo "version=$art_version"
           mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=$art_version
