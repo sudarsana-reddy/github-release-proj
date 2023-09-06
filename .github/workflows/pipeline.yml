@@ -1,0 +1,20 @@
+name: Pipeline 
+
+on:
+  push:
+    branches: ['dev', 'main']  
+  pull_request:    
+  workflow_dispatch:
+
+jobs:
+
+  initJob:
+    uses: ./.github/workflows/init-inputs.yml
+
+  sync-deploy-verify-job: 
+    needs: [initJob]  
+    uses: ./.github/workflows/build-deploy.yml
+    with:
+      BRANCH: ${{ needs.initJob.outputs.BRANCH }}
+      ENVIRONMENT: ${{ needs.initJob.outputs.ENVIRONMENT }}
+    secrets: inherit

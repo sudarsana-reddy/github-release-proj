@@ -1,0 +1,41 @@
+name: build-deploy
+
+on:
+  workflow_call:
+    inputs:
+      BRANCH:
+        description: "branch name"
+        type: string
+        required: true
+
+      ENVIRONMENT:
+        description: "Environment name"
+        type: string
+        required: true     
+     
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: build
+        run: |
+          echo "build job is done for ${{ inputs.BRANCH }}"
+          
+          
+  deploy:
+    needs: [build]
+    environment: ${{ inputs.ENVIRONMENT }}
+    runs-on: ubuntu-latest
+    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }} 
+    steps:
+      - name: deploy to ${{ inputs.ENVIRONMENT }}
+        run: |
+          echo "Deployment to '${{ inputs.ENVIRONMENT  }}'' successful"
+          
+      - name: notification
+        run: |
+          echo "notification is done. Status: ${{ job.status }}"

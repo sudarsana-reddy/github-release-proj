@@ -1,0 +1,42 @@
+name: sync-deploy-verify
+
+on:
+  workflow_call:
+    outputs:
+      BRANCH:
+        description: "branch name"
+        value: ${{ jobs.initJob.outputs.BRANCH }}
+
+      ENVIRONMENT:
+        description: "environment name"
+        value: ${{ jobs.initJob.outputs.ENVIRONMENT }}      
+          
+ 
+jobs:
+  initJob:
+    runs-on: ubuntu-latest
+    outputs:   
+      BRANCH: ${{steps.initVars.outputs.BRANCH}}
+      ENVIRONMENT: ${{steps.initVars.outputs.ENVIRONMENT}}
+      
+    steps:
+    - name: initalize Inputs
+      id: initVars
+      run: |  
+        echo ${{ github.ref }}
+        echo ${{ github.ref_name }}
+        echo ${{ github.event_name }}
+        
+        if [[ "${{ github.ref_name }}" == *"develop" ]]; then
+          echo "::set-output name=BRANCH::develop"
+          echo "::set-output name=ENVIRONMENT::dev"
+      
+        elif [[ "${{ github.ref_name }}" == *"main" ]]; then
+          echo "::set-output name=BRANCH::main"
+          echo "::set-output name=ENVIRONMENT::prod"        
+        fi
+
+    - name: Print the outputs
+      run: |
+        echo "BRANCH: ${{steps.initVars.outputs.BRANCH}}"
+        echo "ENVIRONMENT: ${{steps.initVars.outputs.ENVIRONMENT}}"       
