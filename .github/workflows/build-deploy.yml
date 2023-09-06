@@ -18,39 +18,39 @@ permissions:
      
  
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v3
 
-      - name: build
-        run: |
-          mvn clean install
+  #     - name: build
+  #       run: |
+  #         mvn clean install
       
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }}
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
+  # release:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }}
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v3
 
-      - name: release to github packages
-        run: |
-          # mvn clean deploy -s ci_settings.xml
-          # git config --global user.email "you@example.com"
-          git config user.name $GIT_USERNAME
-          mvn release:clean release:prepare release:perform -s ci_settings.xml
-        env:
-            GITHUB_TOKEN: ${{ secrets.PAT }}
-            GIT_USERNAME: ${{ github.actor }}
-            GIT_PASSWORD: ${{ secrets.PAT }}
+  #     - name: release to github packages
+  #       run: |
+  #         # mvn clean deploy -s ci_settings.xml
+  #         # git config --global user.email "you@example.com"
+  #         git config user.name $GIT_USERNAME
+  #         mvn release:clean release:prepare release:perform -s ci_settings.xml
+  #       env:
+  #           GITHUB_TOKEN: ${{ secrets.PAT }}
+  #           GIT_USERNAME: ${{ github.actor }}
+  #           GIT_PASSWORD: ${{ secrets.PAT }}
           
           
   deploy:
-    needs: [release]
+    # needs: [release]
     environment: ${{ inputs.ENVIRONMENT }}
     runs-on: ubuntu-latest
     if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }} 
