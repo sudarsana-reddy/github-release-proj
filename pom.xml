@@ -14,9 +14,9 @@
   <!-- FIXME change it to the project's website -->
   
   <scm>
-    <connection>scm:git:https://github.com/sudarsana-reddy/github-release-proj.git</connection>
+    <connection>scm:git:https://${GIT_USERNAME}:${GIT_PASSWORD}github.com/sudarsana-reddy/github-release-proj.git</connection>
     <url>http://github.com/sudarsana-reddy/github-release-proj</url>
-    <developerConnection>scm:git:https://github.com/sudarsana-reddy/github-release-proj.git</developerConnection>
+    <developerConnection>scm:git:https://${GIT_USERNAME}:${GIT_PASSWORD}github.com/sudarsana-reddy/github-release-proj.git</developerConnection>
  </scm>
 
   <properties>
