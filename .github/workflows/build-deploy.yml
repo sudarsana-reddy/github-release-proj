@@ -57,13 +57,15 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-        
+
       - name: deploy to ${{ inputs.ENVIRONMENT }}
         run: |
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
           mvn clean dependency:copy -s ci_settings.xml
           cd target
           ls -ltr 
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
           
       - name: notification
         run: |
