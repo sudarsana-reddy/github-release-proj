@@ -37,6 +37,8 @@ jobs:
       - name: release to github packages
         run: |
           # mvn clean deploy -s ci_settings.xml
+          # git config --global user.email "you@example.com"
+          git config --global user.name $GIT_USERNAME
           mvn release:clean release:prepare release:perform -s ci_settings.xml
         env:
             GITHUB_TOKEN: ${{ secrets.PAT }}
