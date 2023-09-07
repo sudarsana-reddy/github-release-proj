@@ -81,7 +81,7 @@ jobs:
         run: |
           warFile="demo-${{ steps.artifactVersion.outputs.ARTIFACT_VERSION }}.war"
           echo "war file:$warFile"
-          mvn tomcat7:redeploy -Ddeploy.warFile="./target\$warFile" -Ddeploy.url=${{ secrets.TOMCAT_URL }} -Ddeploy.server=TomcatServer -Ddeploy.path=/hello -s ci_settings.xml
+          mvn tomcat7:redeploy -Ddeploy.warFile="./target/$warFile" -Ddeploy.url=${{ secrets.TOMCAT_URL }} -Ddeploy.server=TomcatServer -Ddeploy.path=/hello -s ci_settings.xml
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
           
       - name: notification
