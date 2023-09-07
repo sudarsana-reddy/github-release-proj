@@ -10,11 +10,6 @@ on:
       ENVIRONMENT:
         description: "environment name"
         value: ${{ jobs.init-inputs.outputs.ENVIRONMENT }}
-
-      ARTIFACT_VERSION:
-        description: "environment name"
-        value: ${{ jobs.init-inputs.outputs.ARTIFACT_VERSION }}
-          
  
 jobs:
   init-inputs:
@@ -22,7 +17,6 @@ jobs:
     outputs:   
       BRANCH: ${{steps.initVars.outputs.BRANCH}}
       ENVIRONMENT: ${{steps.initVars.outputs.ENVIRONMENT}}
-      ARTIFACT_VERSION:  ${{steps.initVars.outputs.ARTIFACT_VERSION}}
       
     steps:
     - name: Initialize Inputs
@@ -39,18 +33,10 @@ jobs:
         elif [[ "${{ github.ref_name }}" == *"main" ]]; then
           echo "BRANCH=main" >> "$GITHUB_OUTPUT"
           echo "ENVIRONMENT=prod"  >> "$GITHUB_OUTPUT"      
-        fi
+        fi       
         
-        project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-        echo "project Version = '$project_version'"
-        IFS='-'
-        read -ra arr <<< "$project_version"
-        art_version=${arr[0]}
-        echo "version=$art_version"
-        echo "ARTIFACT_VERSION=$art_version"  >> "$GITHUB_OUTPUT"
 
     - name: Print the outputs
       run: |
         echo "BRANCH: ${{steps.initVars.outputs.BRANCH}}"
         echo "ENVIRONMENT: ${{steps.initVars.outputs.ENVIRONMENT}}"
-        echo "ARTIFACT_VERSION: ${{steps.initVars.outputs.ARTIFACT_VERSION}}"

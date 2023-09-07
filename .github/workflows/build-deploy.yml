@@ -13,14 +13,8 @@ on:
         type: string
         required: true
 
-      ARTIFACT_VERSION:
-        description: "Artifact Version"
-        type: string
-        required: true
-
 permissions:
   contents: write
-     
  
 jobs:
   build:
@@ -63,15 +57,26 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
+      - name: Get artifact Version
+        id: artifactVersion
+        run: |
+          project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "project Version = '$project_version'"
+          IFS='-'
+          read -ra arr <<< "$project_version"
+          art_version=${arr[0]}
+          echo "version=$art_version"
+          echo "ARTIFACT_VERSION=$art_version"  >> "$GITHUB_OUTPUT"
+
       - name: Copy dependencies
         run: |
-          mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=${{ inputs.ARTIFACT_VERSION }}
+          mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=${{ steps.artifactVersion.outputs.ARTIFACT_VERSION }}
           cd target
           ls -ltr
 
       - name: deploy to ${{ inputs.ENVIRONMENT }}
         run: |
-          warFile="demo-${{ inputs.ARTIFACT_VERSION }}.war"
+          warFile="demo-${{ steps.artifactVersion.outputs.ARTIFACT_VERSION }}.war"
           echo "war file:$warFile"
           mvn tomcat7:redeploy -Ddeploy.warFile="./target\$warFile" -Ddeploy.url=${{ secrets.TOMCAT_URL }} -Ddeploy.server=TomcatServer -Ddeploy.path=/hello -s ci_settings.xml
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
