@@ -52,7 +52,10 @@ jobs:
     needs: [release]
     environment: ${{ inputs.ENVIRONMENT }}
     runs-on: ubuntu-latest
-    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }} 
+    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }}
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT }}
+      TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -72,7 +75,7 @@ jobs:
         run: |
           mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=${{ steps.artifactVersion.outputs.ARTIFACT_VERSION }}
           cd target
-          ls -ltr
+          ls -ltr        
 
       - name: deploy to ${{ inputs.ENVIRONMENT }}
         run: |
@@ -80,9 +83,6 @@ jobs:
           echo "war file:$warFile"
           mvn tomcat7:redeploy -Ddeploy.warFile="./target\$warFile" -Ddeploy.url=${{ secrets.TOMCAT_URL }} -Ddeploy.server=TomcatServer -Ddeploy.path=/hello -s ci_settings.xml
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
           
       - name: notification
         run: |
