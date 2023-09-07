@@ -19,6 +19,5 @@ jobs:
     uses: ./.github/workflows/build-deploy.yml
     with:
       BRANCH: ${{ needs.init-inputs-job.outputs.BRANCH }}
-      ENVIRONMENT: ${{ needs.init-inputs-job.outputs.ENVIRONMENT }}
-      ARTIFACT_VERSION: ${{ needs.init-inputs-job.outputs.ARTIFACT_VERSION }}
+      ENVIRONMENT: ${{ needs.init-inputs-job.outputs.ENVIRONMENT }}      
     secrets: inherit
