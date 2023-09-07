@@ -58,21 +58,17 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
+      - name: Copy dependencies
+        uses: |
+          mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=${{ inputs.ARTIFACT_VERSION }}
+          cd target
+          ls -ltr
+
       - name: deploy to ${{ inputs.ENVIRONMENT }}
         run: |
-          project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "project Version = '$project_version'"
-          IFS='-'
-          read -ra arr <<< "$project_version"
-          art_version=${arr[0]}
-          echo "version=$art_version"
-          mvn clean dependency:copy -s ci_settings.xml -Ddemo.version=$art_version
-          cd target
-          ls -ltr 
-          cd ..
-          warFile="demo-$art_version.war"
+          warFile="demo-${{ inputs.ARTIFACT_VERSION }}.war"
           echo "war file:$warFile"
-          mvn tomcat7:deploy -s ci_settings.xml -DwarFile="./target/$warFile"
+          mvn tomcat7:redeploy -Ddeploy.warFile="./target\$warFile" -Ddeploy.url=${{ secrets.TOMCAT_URL }} -Ddeploy.server=TomcatServer -Ddeploy.path=/hello -s ci_settings.xml
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}

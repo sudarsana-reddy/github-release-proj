@@ -20,4 +20,5 @@ jobs:
     with:
       BRANCH: ${{ needs.init-inputs-job.outputs.BRANCH }}
       ENVIRONMENT: ${{ needs.init-inputs-job.outputs.ENVIRONMENT }}
+      ARTIFACT_VERSION: ${{ needs.init-inputs-job.outputs.ARTIFACT_VERSION }}
     secrets: inherit
