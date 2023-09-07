@@ -11,7 +11,12 @@ on:
       ENVIRONMENT:
         description: "Environment name"
         type: string
-        required: true     
+        required: true
+
+      ARTIFACT_VERSION:
+        description: "Artifact Version"
+        type: string
+        required: true
 
 permissions:
   contents: write
