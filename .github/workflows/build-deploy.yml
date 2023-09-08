@@ -58,7 +58,7 @@ jobs:
           # mvn clean deploy -s ci_settings.xml
           # git config --global user.email "you@example.com"
           git config user.name $GIT_USERNAME
-          mvn release:clean release:prepare release:perform -s ci_settings.xml -Drelease.version=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
+          mvn release:clean release:prepare release:perform -s ci_settings.xml -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
         env:
             GITHUB_TOKEN: ${{ secrets.PAT }}
             GIT_USERNAME: ${{ github.actor }}
