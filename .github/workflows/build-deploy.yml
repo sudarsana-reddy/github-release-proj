@@ -42,7 +42,7 @@ jobs:
           echo "getting the branch name"
           branchName=$(git symbolic-ref --short HEAD)
           echo "branch name: $branchName"
-          echo "BRANCH_NAME=$branchName" >> GITHUB_OUTPUT
+          echo "BRANCH_NAME=$branchName" >> "$GITHUB_OUTPUT"
           
           project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "project Version = '$project_version'"
