@@ -36,12 +36,29 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
+      - name: Get branch version
+        id: getBranchNameAndVersion
+        run: |
+          echo "getting the branch name"
+          branchName=$(git symbolic-ref --short HEAD)
+          echo "branch name: $branchName"
+          echo "BRANCH_NAME=$branchName" >> GITHUB_OUTPUT
+          
+          project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "project Version = '$project_version'"
+          IFS='-'
+          read -ra arr <<< "$project_version"
+          art_version=${arr[0]}
+          echo "version=$art_version"
+          echo "ARTIFACT_VERSION=$art_version"  >> "$GITHUB_OUTPUT"
+          
+
       - name: release to github packages
         run: |
           # mvn clean deploy -s ci_settings.xml
           # git config --global user.email "you@example.com"
           git config user.name $GIT_USERNAME
-          mvn release:clean release:prepare release:perform -s ci_settings.xml
+          mvn release:clean release:prepare release:perform -s ci_settings.xml -Drelease.version=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
         env:
             GITHUB_TOKEN: ${{ secrets.PAT }}
             GIT_USERNAME: ${{ github.actor }}
