@@ -89,7 +89,7 @@
     </repository> -->
     <repository>
       <id>nexus-release</id>
-      <url>https://ee40-124-123-191-210.ngrok-free.app/repository/demo-release/</url>     
+      <url>https://ee40-124-123-191-210.ngrok-free.app/repository/demo/</url>     
     </repository>
     <snapshotRepository>
       <id>nexus-snapshots</id>
