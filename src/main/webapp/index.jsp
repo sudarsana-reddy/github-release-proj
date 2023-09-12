@@ -1,10 +1,10 @@
 <html>
 <body>
 <h2>Hello World!</h2>
-<ul>
+<ol>
     <li>Dev</li>
     <li>SIT</li>
     <li>PROD</li>
-</ul>
+</ol>
 </body>
 </html>
