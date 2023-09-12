@@ -14,5 +14,20 @@
       <username>admin</username>
       <password>${env.TOMCAT_PASSWORD}</password>
     </server>
+    <server>
+      <id>BitBucket</id>
+      <username>sudarsana.ala@gmail.com</username>
+      <password>${env.BITBUCKET_PASSWORD}</password>
+    </server>
+    <server>
+      <id>nexus-release</id>
+      <username>admin</username>
+      <password>${env.NEXUS_PASSWORD}</password>
+    </server>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>admin</username>
+      <password>${env.NEXUS_PASSWORD}</password>
+    </server>
   </servers>
 </settings>
