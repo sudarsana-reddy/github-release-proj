@@ -60,9 +60,9 @@ jobs:
           # mvn release:clean release:prepare release:perform -s ci_settings.xml -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
           mvn release:clean release:prepare release:perform -s ci_settings.xml -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
         env:
-            # GITHUB_TOKEN: ${{ secrets.PAT }}
-            # GIT_USERNAME: ${{ github.actor }}
-            # GIT_PASSWORD: ${{ secrets.PAT }}
+            GITHUB_TOKEN: ${{ secrets.PAT }}
+            GIT_USERNAME: ${{ github.actor }}
+            GIT_PASSWORD: ${{ secrets.PAT }}
             BITBUCKET_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
             NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
             
