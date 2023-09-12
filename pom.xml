@@ -82,6 +82,13 @@
     </repository>
   </repositories> -->
 
+  <repositories>
+    <repository>
+      <id>nexus-release</id>
+      <url>https://ee40-124-123-191-210.ngrok-free.app/repository/demo/</url>     
+    </repository>
+  </repositories>
+
   <distributionManagement>
     <!-- <repository>
       <id>github-packages</id>
