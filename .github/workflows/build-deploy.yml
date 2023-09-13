@@ -59,7 +59,7 @@ jobs:
           # mvn clean deploy -s ci_settings.xml          
           git config user.name sudarsana.ala@gmail.com
           # mvn release:clean release:prepare release:perform -s ci_settings.xml -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
-          mvn release:clean release:prepare release:perform -s ci_settings.xml -DreleaseVersion=${{steps.getBranchNameAndVersion.outputs.PROJECT_VERSION}} -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
+          mvn release:clean release:prepare release:perform -s ci_settings.xml -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
         env:
             GITHUB_TOKEN: ${{ secrets.PAT }}
             GIT_USERNAME: ${{ github.actor }}
