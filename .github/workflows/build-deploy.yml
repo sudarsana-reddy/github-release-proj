@@ -11,7 +11,7 @@ on:
       ENVIRONMENT:
         description: "Environment name"
         type: string
-        required: true
+        required: true      
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }}
+    if: ${{ contains(fromJson('["main", "sit"]'), inputs.BRANCH) && github.event_name != 'pull_request' }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -59,7 +59,7 @@ jobs:
           # mvn clean deploy -s ci_settings.xml          
           git config user.name sudarsana.ala@gmail.com
           # mvn release:clean release:prepare release:perform -s ci_settings.xml -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
-          mvn release:clean release:prepare release:perform -s ci_settings.xml -DreleaseVersion=${{steps.getBranchNameAndVersion.outputs.PROJECT_VERSION}} -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
+          mvn release:clean release:prepare release:perform -s ci_settings.xml -DtagNameFormat=${{steps.getBranchNameAndVersion.outputs.BRANCH_NAME}}-${{steps.getBranchNameAndVersion.outputs.ARTIFACT_VERSION}}
         env:
             GITHUB_TOKEN: ${{ secrets.PAT }}
             GIT_USERNAME: ${{ github.actor }}
@@ -73,7 +73,7 @@ jobs:
     needs: [release]
     environment: ${{ inputs.ENVIRONMENT }}
     runs-on: ubuntu-latest
-    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }}
+    if: ${{ contains(fromJson('["main", "sit"]'), inputs.BRANCH) && github.event_name != 'pull_request' }}
     env:
       GITHUB_TOKEN: ${{ secrets.PAT }}
       TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
@@ -102,7 +102,7 @@ jobs:
         run: |
           warFile="demo-${{ steps.artifactVersion.outputs.ARTIFACT_VERSION }}.war"
           echo "war file:$warFile"
-          mvn tomcat7:redeploy -Ddeploy.warFile="./target/$warFile" -Ddeploy.url=${{ secrets.TOMCAT_URL }} -Ddeploy.server=TomcatServer -Ddeploy.path=/hello -s ci_settings.xml
+          mvn tomcat7:redeploy -Ddeploy.warFile="./target/$warFile" -Ddeploy.url=${{ secrets.TOMCAT_SERVER_URL }} -Ddeploy.server=${{ vars.TOMCAT_SERVER }} -Ddeploy.path=/hello -s ci_settings.xml
           echo "Deployment to '${{ inputs.ENVIRONMENT  }}' successful"
           
       - name: notification

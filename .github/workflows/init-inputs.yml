@@ -32,7 +32,11 @@ jobs:
       
         elif [[ "${{ github.ref_name }}" == *"main" ]]; then
           echo "BRANCH=main" >> "$GITHUB_OUTPUT"
-          echo "ENVIRONMENT=prod"  >> "$GITHUB_OUTPUT"      
+          echo "ENVIRONMENT=prod"  >> "$GITHUB_OUTPUT"  
+          
+        elif [[ "${{ github.ref_name }}" == *"sit" ]]; then
+          echo "BRANCH=sit" >> "$GITHUB_OUTPUT"
+          echo "ENVIRONMENT=sit"  >> "$GITHUB_OUTPUT"   
         fi       
         
 
