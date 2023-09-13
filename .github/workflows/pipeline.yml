@@ -2,7 +2,7 @@ name: Pipeline
 
 on:
   push:
-    branches: ['dev', 'main']  
+    branches: ['dev', 'main', 'sit']  
   pull_request:    
   workflow_dispatch:
 
