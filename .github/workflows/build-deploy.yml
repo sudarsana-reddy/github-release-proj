@@ -31,7 +31,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ inputs.BRANCH == 'main'  && github.event_name != 'pull_request' }}
+    if: ${{ contains(fromJson('["main", "sit"]', inputs.BRANCH)) && github.event_name != 'pull_request' }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
