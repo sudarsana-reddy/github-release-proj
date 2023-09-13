@@ -10,7 +10,12 @@
       <password>${env.GITHUB_TOKEN}</password>
     </server>
     <server>
-      <id>TomcatServer</id>
+      <id>ProdTomcatServer</id>
+      <username>admin</username>
+      <password>${env.TOMCAT_PASSWORD}</password>
+    </server>
+    <server>
+      <id>SitTomcatServer</id>
       <username>admin</username>
       <password>${env.TOMCAT_PASSWORD}</password>
     </server>
