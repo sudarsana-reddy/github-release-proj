@@ -31,7 +31,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ contains(fromJson('["main", "sit"]', inputs.BRANCH)) && github.event_name != 'pull_request' }}
+    if: ${{ contains(fromJson('["main", "sit"]'), inputs.BRANCH) && github.event_name != 'pull_request' }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -73,7 +73,7 @@ jobs:
     needs: [release]
     environment: ${{ inputs.ENVIRONMENT }}
     runs-on: ubuntu-latest
-    if: ${{ contains(fromJson('["main", "sit"]', inputs.BRANCH)) && github.event_name != 'pull_request' }}
+    if: ${{ contains(fromJson('["main", "sit"]'), inputs.BRANCH) && github.event_name != 'pull_request' }}
     env:
       GITHUB_TOKEN: ${{ secrets.PAT }}
       TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
