@@ -1,4 +1,4 @@
-name: CI
+name: Release
 
 on:
     workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
               with:
                 ref: ${{ inputs.BRANCH }}
             
-            - name: Release tags and package
+            - name: Release tags and package for ${{ inputs.BRANCH }}
               run: |
                 mvn release:clean release:prepare release:perform -s ci_settings.xml
               env:
