@@ -32,6 +32,7 @@ jobs:
             
             - name: Release tags and package for ${{ inputs.BRANCH }}
               run: |
+                git config user.name $GIT_USERNAME
                 mvn release:clean release:prepare release:perform -s ci_settings.xml
               env:
                 GITHUB_TOKEN: ${{ secrets.PAT }}
