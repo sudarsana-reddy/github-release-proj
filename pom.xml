@@ -72,32 +72,32 @@
     </pluginManagement>
   </build>
 
-  <!-- <repositories>
+  <repositories>
     <repository>
       <id>github-packages</id>
       <url>https://maven.pkg.github.com/sudarsana-reddy/github-release-proj</url>
     </repository>
-  </repositories> -->
+  </repositories>
 
-  <repositories>
+  <!-- <repositories>
     <repository>
       <id>nexus-release</id>
       <url>https://d431-124-123-168-160.ngrok-free.app/repository/demo/</url>
     </repository>
-  </repositories>
+  </repositories> -->
 
   <distributionManagement>
-    <!-- <repository>
+    <repository>
       <id>github-packages</id>
       <url>https://maven.pkg.github.com/sudarsana-reddy/github-release-proj</url>     
-    </repository> -->
-    <repository>
+    </repository>
+    <!-- <repository>
       <id>nexus-release</id>
       <url>https://d431-124-123-168-160.ngrok-free.app/repository/demo/</url>
     </repository>
     <snapshotRepository>
       <id>nexus-snapshots</id>
       <url>https://d431-124-123-168-160.ngrok-free.app/repository/demo-snapshots/</url>
-    </snapshotRepository>
+    </snapshotRepository> -->
   </distributionManagement>
 </project>
