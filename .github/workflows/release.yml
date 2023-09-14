@@ -12,23 +12,27 @@ jobs:
         steps:
             - name: Get Branch Name
               run: |
-                echo "Branch Name: ${{github.ref}}"
+                echo "Branch Name: ${{github.ref_name}}"
 
     build-release:
         runs-on: ubuntu-latest
         needs: verify-branch-name
-        if: ${{ contains(fromJson('["refs/heads/sit", "refs/heads/uat"]')  , github.ref) }}
+        if: ${{ contains(fromJson('["sit", "uat"]')  , github.ref_name) }}
         steps:
             - name: Code Checkout
               uses: actions/checkout@v3
-              with:
-                ref: ${{ github.ref }}
+              
+            - name: List files
+              run: |
+                ls -ltr
+                cat ver.txt
+                
 
             - name: build
               run: |
                 mvn clean install
 
-            - name: Release tags and package for ${{ github.ref }}
+            - name: Release tags and package for ${{ github.ref_name }}
               run: |
                 git config user.name $GIT_USERNAME
                 mvn release:clean release:prepare release:perform -s ci_settings.xml
