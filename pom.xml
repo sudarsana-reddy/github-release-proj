@@ -5,7 +5,7 @@
 
   <groupId>com.sud.demo</groupId>
   <artifactId>demo</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <name>Demo Maven Webapp</name>
@@ -16,7 +16,7 @@
     <url>http://github.com/sudarsana-reddy/github-release-proj</url>
     <developerConnection>scm:git:https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/sudarsana-reddy/github-release-proj.git</developerConnection>
 
-    <tag>demo-0.0.1</tag>    
+    <tag>demo-main-1.23</tag>    
   </scm>
 
   <properties>
