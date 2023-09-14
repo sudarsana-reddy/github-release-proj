@@ -9,7 +9,7 @@ permissions:
 jobs:
     build-release:
         runs-on: ubuntu-latest
-        if: ${{ contains(fromJson('["refs/head/sit", "refs/head/uat"]')  , github.ref) }}
+        if: ${{ contains(fromJson('["refs/heads/sit", "refs/heads/uat"]')  , github.ref) }}
         steps:
             - name: Code Checkout
               uses: actions/checkout@v3
