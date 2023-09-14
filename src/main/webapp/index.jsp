@@ -10,5 +10,7 @@
 <p>
     This is a sample paragraph!!!!
 </p>
+<label>Name: </label>
+<input type="text"/>
 </body>
 </html>
