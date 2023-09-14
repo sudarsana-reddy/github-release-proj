@@ -10,7 +10,7 @@
 
   <packaging>war</packaging>
 
-  <name>demo Maven Webapp</name>
+  <name>Demo Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   
   <scm>
@@ -87,7 +87,7 @@
   <repositories>
     <repository>
       <id>nexus-release</id>
-      <url>https://2379-124-123-181-103.ngrok-free.app/repository/demo/</url>     
+      <url>https://d431-124-123-168-160.ngrok-free.app/repository/demo/</url>     
     </repository>
   </repositories>
 
@@ -98,11 +98,11 @@
     </repository> -->
     <repository>
       <id>nexus-release</id>
-      <url>https://2379-124-123-181-103.ngrok-free.app/repository/demo/</url>     
+      <url>https://d431-124-123-168-160.ngrok-free.app/repository/demo/</url>     
     </repository>
     <snapshotRepository>
       <id>nexus-snapshots</id>
-      <url>https://2379-124-123-181-103.ngrok-free.app/repository/demo-snapshots/</url>     
+      <url>https://d431-124-123-168-160.ngrok-free.app/repository/demo-snapshots/</url>     
     </snapshotRepository>
   </distributionManagement>
 </project>
