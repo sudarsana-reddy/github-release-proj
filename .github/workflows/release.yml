@@ -20,7 +20,7 @@ jobs:
               run: |
                 mvn clean install
 
-            - name: Release tags and package for ${{ inputs.BRANCH }}
+            - name: Release tags and package for ${{ github.ref }}
               run: |
                 git config user.name $GIT_USERNAME
                 mvn release:clean release:prepare release:perform -s ci_settings.xml
