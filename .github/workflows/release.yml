@@ -1,40 +1,25 @@
 name: Release
 
 on:
-    workflow_dispatch:
-        inputs:
-            BRANCH:
-                type: choice                
-                description: branch for release
-                options:
-                    - sit
-                    - uat 
+    workflow_dispatch:       
 
 permissions:
   contents: write
 
 jobs:
-    build:
+    build-release:
         runs-on: ubuntu-latest
+        if: ${{ contains(fromJson('["refs/head/sit", "refs/head/uat"]')  , github.ref) }}
         steps:
             - name: Code Checkout
               uses: actions/checkout@v3
               with:
-                ref: ${{ inputs.BRANCH }}
+                ref: ${{ github.ref }}
             
             - name: build
               run: |
                 mvn clean install
 
-    release:
-        runs-on: ubuntu-latest
-        needs: build
-        steps:
-            - name: Code Checkout
-              uses: actions/checkout@v3
-              with:
-                ref: ${{ inputs.BRANCH }}
-            
             - name: Release tags and package for ${{ inputs.BRANCH }}
               run: |
                 git config user.name $GIT_USERNAME
@@ -44,6 +29,4 @@ jobs:
                 GIT_USERNAME: ${{ github.actor }}
                 GIT_PASSWORD: ${{ secrets.PAT }}                
                 NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-
-                
                 
