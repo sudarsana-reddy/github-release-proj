@@ -28,5 +28,4 @@ jobs:
                 GITHUB_TOKEN: ${{ secrets.PAT }}
                 GIT_USERNAME: ${{ github.actor }}
                 GIT_PASSWORD: ${{ secrets.PAT }}                
-                NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-                
+                NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}                
