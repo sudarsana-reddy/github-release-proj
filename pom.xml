@@ -6,10 +6,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sud.demo</groupId>
-  <artifactId>services</artifactId>
-  <version>0.1.8-SNAPSHOT</version>
+  <artifactId>demo</artifactId>
+  <version>0.1.9-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Multi module web app</name>  
+  <name>Demo Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
 
   <scm>
     <connection>scm:git:https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/sudarsana-reddy/github-release-proj.git</connection>
