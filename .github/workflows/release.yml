@@ -34,6 +34,6 @@ jobs:
               uses: actions/upload-artifact@v3.1.3
               with:               
                 name: BuildArtifacts             
-                path: "/target/checkout/**/*.war"
+                path: "./target/checkout/**/target/*.war"
                 
             
