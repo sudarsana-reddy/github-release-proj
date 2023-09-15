@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sud.demo</groupId>
-  <artifactId>demo</artifactId>
+  <artifactId>${artifactId}</artifactId>
   <version>0.1.3-SNAPSHOT</version>
   <packaging>war</packaging>
 
