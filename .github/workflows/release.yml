@@ -7,16 +7,8 @@ permissions:
   contents: write
 
 jobs:
-    verify-branch-name:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Get Branch Name
-              run: |
-                echo "Branch Name: ${{github.ref_name}}"
-
     build-release:
-        runs-on: ubuntu-latest
-        needs: verify-branch-name
+        runs-on: ubuntu-latest        
         if: ${{ contains(fromJson('["sit", "uat"]')  , github.ref_name) }}
         steps:
             - name: Code Checkout
