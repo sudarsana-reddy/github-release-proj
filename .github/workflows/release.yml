@@ -25,12 +25,9 @@ jobs:
             - name: List files
               run: |
                 ls -ltr
-                cat ver.txt                
+                cat ver.txt           
 
-            - name: build
-              run: |
-                mvn clean install -Dproject.artifactId=demo-${{ github.ref_name }}
-
+           
             - name: Release tags and package for ${{ github.ref_name }}
               run: |
                 git config user.name $GIT_USERNAME
@@ -45,7 +42,6 @@ jobs:
               uses: actions/upload-artifact@v3.1.3
               with:               
                 name: BuildArtifacts             
-                path: |
-                    - "/target/**/*.war"
+                path: "./target/**/*.war"
                 
             
