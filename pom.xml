@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sud.demo</groupId>
-  <artifactId>demo</artifactId>
+  <artifactId>services</artifactId>
   <version>0.1.8-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>Demo Maven Webapp</name>
-  <!-- FIXME change it to the project's website -->
+  <packaging>pom</packaging>
+  <name>Multi module web app</name>  
 
   <scm>
     <connection>scm:git:https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/sudarsana-reddy/github-release-proj.git</connection>
     <url>http://github.com/sudarsana-reddy/github-release-proj</url>
     <developerConnection>scm:git:https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/sudarsana-reddy/github-release-proj.git</developerConnection>
-
-    <tag>demo-0.1.2-SNAPSHOT</tag>    
+    <tag>services-0.1.8-SNAPSHOT</tag>
   </scm>
+
+  <modules>
+    <module>simple-webapp</module>
+    <module>simple-webapp2</module>
+  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,7 +31,7 @@
   </properties>
 
   <build>
-    <finalName>demo</finalName>
+    <finalName>${project.groupId}.${project.artifactId}.${project.version}</finalName>
     <pluginManagement>
 
       <plugins>
@@ -88,7 +93,7 @@
   <distributionManagement>
     <repository>
       <id>github-packages</id>
-      <url>https://maven.pkg.github.com/sudarsana-reddy/github-release-proj</url>     
+      <url>https://maven.pkg.github.com/sudarsana-reddy/github-release-proj</url>
     </repository>
     <!-- <repository>
       <id>nexus-release</id>
