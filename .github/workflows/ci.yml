@@ -15,4 +15,4 @@ jobs:
             
             - name: build
               run: |
-                mvn clean install -DartifactId=demo-${{ github.ref_name }}
+                mvn clean install -Dproject.artifactId=demo-${{ github.ref_name }}
