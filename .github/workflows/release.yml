@@ -23,7 +23,7 @@ jobs:
             - name: Release tags and package for ${{ github.ref_name }}
               run: |
                 git config user.name $GIT_USERNAME
-                mvn release:clean release:prepare release:perform -s ci_settings.xml -Dproject.artifactId=demo-${{ github.ref_name }}
+                mvn release:clean release:prepare release:perform -s ci_settings.xml
               env:
                 GITHUB_TOKEN: ${{ secrets.PAT }}
                 GIT_USERNAME: ${{ github.actor }}
