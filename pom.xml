@@ -5,7 +5,7 @@
 
   <groupId>com.sud.demo</groupId>
   <artifactId>services</artifactId>
-  <version>0.1.9-SNAPSHOT</version>
+  <version>0.1.9</version>
   <packaging>pom</packaging>
   <name>Services</name>
   <!-- FIXME change it to the project's website -->
