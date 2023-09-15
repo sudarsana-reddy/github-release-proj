@@ -30,10 +30,19 @@ jobs:
                 GIT_PASSWORD: ${{ secrets.PAT }}                
                 NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
 
+            - name: Copy wars to output folder
+              run: |
+                cd target && mkdir output
+                for i in $(find . -iname "*.war" -type f)
+                do 
+                    echo $i
+                    mv $i ./output
+                done                
+
             - name: Upload Build Artifacts
               uses: actions/upload-artifact@v3.1.3
               with:               
                 name: BuildArtifacts             
-                path: "**/checkout/**/*.war"
+                path: "target/output/*.war"
                 
             
